@@ -1,0 +1,13 @@
+C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\bin\WebApplication1.dll.config
+C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\bin\WebApplication1.dll
+C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\bin\EntityFramework.dll
+C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.dll
+C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\bin\EntityFramework.xml
+C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.xml
+C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csproj.CoreCompileInputs.cache
+C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache

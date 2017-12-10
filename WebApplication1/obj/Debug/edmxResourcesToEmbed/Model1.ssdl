@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MOVIESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="films">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="DIRid" Type="int" Nullable="false" />
+    <Property Name="Authorid" Type="int" Nullable="false" />
+    <Property Name="Gener" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Year" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="plot" Type="varchar(max)" Nullable="false" />
+    <Property Name="length" Type="float" Nullable="false" />
+    <Property Name="rate" Type="float" Nullable="false" />
+    <Property Name="Nofrates" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'MOVIES.dbo.moviep' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="moviep">
+    <Key>
+      <PropertyRef Name="filmp" />
+      <PropertyRef Name="filmid" />
+    </Key>
+    <Property Name="filmp" Type="image" Nullable="false" />
+    <Property Name="filmid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="person">
+    <Key>
+      <PropertyRef Name="PID" />
+    </Key>
+    <Property Name="PID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="birth" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="job" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="prate" Type="float" Nullable="false" />
+    <Property Name="pnofrate" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="personp">
+    <Key>
+      <PropertyRef Name="persp" />
+      <PropertyRef Name="personid" />
+    </Key>
+    <Property Name="persp" Type="image" Nullable="false" />
+    <Property Name="personid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="userpassword" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_moviep_films">
+    <End Role="films" Type="Self.films" Multiplicity="1" />
+    <End Role="moviep" Type="Self.moviep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="films">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="moviep">
+        <PropertyRef Name="filmid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_personp_person">
+    <End Role="person" Type="Self.person" Multiplicity="1" />
+    <End Role="personp" Type="Self.personp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="person">
+        <PropertyRef Name="PID" />
+      </Principal>
+      <Dependent Role="personp">
+        <PropertyRef Name="personid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MOVIESModelStoreContainer">
+    <EntitySet Name="films" EntityType="Self.films" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="person" EntityType="Self.person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="moviep" EntityType="Self.moviep" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [moviep].[filmp] AS [filmp], 
+    [moviep].[filmid] AS [filmid]
+    FROM [dbo].[moviep] AS [moviep]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="personp" EntityType="Self.personp" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [personp].[persp] AS [persp], 
+    [personp].[personid] AS [personid]
+    FROM [dbo].[personp] AS [personp]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_moviep_films" Association="Self.FK_moviep_films">
+      <End Role="films" EntitySet="films" />
+      <End Role="moviep" EntitySet="moviep" />
+    </AssociationSet>
+    <AssociationSet Name="FK_personp_person" Association="Self.FK_personp_person">
+      <End Role="person" EntitySet="person" />
+      <End Role="personp" EntitySet="personp" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

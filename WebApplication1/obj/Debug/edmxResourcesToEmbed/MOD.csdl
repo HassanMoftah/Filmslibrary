@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MOVIESModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="film">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="DIRid" Type="Int32" Nullable="false" />
+    <Property Name="Authorid" Type="Int32" Nullable="false" />
+    <Property Name="Gener" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Year" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="plot" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="length" Type="Double" Nullable="false" />
+    <Property Name="rate" Type="Double" Nullable="false" />
+    <Property Name="Nofrates" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="movieps" Relationship="Self.FK_moviep_films" FromRole="films" ToRole="moviep" />
+    <NavigationProperty Name="Relations" Relationship="Self.FK_Relations_films" FromRole="films" ToRole="Relations" />
+  </EntityType>
+  <EntityType Name="person">
+    <Key>
+      <PropertyRef Name="PID" />
+    </Key>
+    <Property Name="PID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="birth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="job" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="prate" Type="Double" Nullable="false" />
+    <Property Name="pnofrate" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="personps" Relationship="Self.FK_personp_person" FromRole="person" ToRole="personp" />
+    <NavigationProperty Name="Relations" Relationship="Self.FK_Relations_person" FromRole="person" ToRole="Relations" />
+  </EntityType>
+  <EntityType Name="Relation">
+    <Key>
+      <PropertyRef Name="mm" />
+    </Key>
+    <Property Name="mm" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="movieid" Type="Int32" Nullable="false" />
+    <Property Name="perid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="film" Relationship="Self.FK_Relations_films" FromRole="Relations" ToRole="films" />
+    <NavigationProperty Name="person" Relationship="Self.FK_Relations_person" FromRole="Relations" ToRole="person" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userpassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="moviep">
+    <Key>
+      <PropertyRef Name="filmp" />
+      <PropertyRef Name="filmid" />
+    </Key>
+    <Property Name="filmp" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="filmid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="film" Relationship="Self.FK_moviep_films" FromRole="moviep" ToRole="films" />
+  </EntityType>
+  <EntityType Name="personp">
+    <Key>
+      <PropertyRef Name="persp" />
+      <PropertyRef Name="personid" />
+    </Key>
+    <Property Name="persp" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="personid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="person" Relationship="Self.FK_personp_person" FromRole="personp" ToRole="person" />
+  </EntityType>
+  <Association Name="FK_moviep_films">
+    <End Role="films" Type="Self.film" Multiplicity="1" />
+    <End Role="moviep" Type="Self.moviep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="films">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="moviep">
+        <PropertyRef Name="filmid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Relations_films">
+    <End Role="films" Type="Self.film" Multiplicity="1" />
+    <End Role="Relations" Type="Self.Relation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="films">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Relations">
+        <PropertyRef Name="movieid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_personp_person">
+    <End Role="person" Type="Self.person" Multiplicity="1" />
+    <End Role="personp" Type="Self.personp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="person">
+        <PropertyRef Name="PID" />
+      </Principal>
+      <Dependent Role="personp">
+        <PropertyRef Name="personid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Relations_person">
+    <End Role="person" Type="Self.person" Multiplicity="1" />
+    <End Role="Relations" Type="Self.Relation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="person">
+        <PropertyRef Name="PID" />
+      </Principal>
+      <Dependent Role="Relations">
+        <PropertyRef Name="perid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MOVIESEntities3" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="films" EntityType="Self.film" />
+    <EntitySet Name="people" EntityType="Self.person" />
+    <EntitySet Name="Relations" EntityType="Self.Relation" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <EntitySet Name="movieps" EntityType="Self.moviep" />
+    <EntitySet Name="personps" EntityType="Self.personp" />
+    <AssociationSet Name="FK_moviep_films" Association="Self.FK_moviep_films">
+      <End Role="films" EntitySet="films" />
+      <End Role="moviep" EntitySet="movieps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Relations_films" Association="Self.FK_Relations_films">
+      <End Role="films" EntitySet="films" />
+      <End Role="Relations" EntitySet="Relations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_personp_person" Association="Self.FK_personp_person">
+      <End Role="person" EntitySet="people" />
+      <End Role="personp" EntitySet="personps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Relations_person" Association="Self.FK_Relations_person">
+      <End Role="person" EntitySet="people" />
+      <End Role="Relations" EntitySet="Relations" />
+    </AssociationSet>
+    <FunctionImport Name="getactors" ReturnType="Collection(String)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>
