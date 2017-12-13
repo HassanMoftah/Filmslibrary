@@ -35,19 +35,20 @@ namespace WebApplication1
             else if(ss=="login")
             {
                 string username = user.Text.ToString();
-                var query = from c in db.users where c.username == username select c;
-                user us = query.Single();
-                string paso = us.userpassword;
-                if(paso==pass.Text.ToString())
+                var us = (from c in db.users where c.username == username
+                          where c.userpassword == pass.Text.ToString() select c).SingleOrDefault();
+                //adry
+                if (us == null)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('invalid user name or password');", true);
+                }
+                else
                 {
                     Session["status"] = "loggedin";
                     Response.Redirect("HomePage.aspx");
 
                 }
-                else
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('invalid user name or password');", true);
-                }
+               
             }
         }
     }

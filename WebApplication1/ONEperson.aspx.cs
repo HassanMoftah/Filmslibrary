@@ -29,7 +29,7 @@ namespace WebApplication1
             personp imgs = img.Single();
             byte[] bebo = imgs.persp;
             string ptr = Convert.ToBase64String(bebo);
-            Image1.ImageUrl = "data:image/png;base64," + ptr;
+            Image1.ImageUrl = "data:image;base64," + ptr;
         }
 
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -52,16 +52,23 @@ namespace WebApplication1
             string state = (string)Session["status"];
             if (state == "loggedin")
             {
+                
                 double userrat = Convert.ToDouble(userrate.Text.ToString());
+                if (userrat >= 0 && userrat <= 10)
+                {
+                    double nrate = (cnofrate * crate + userrat) / (cnofrate + 1);
+                    cnofrate++;
 
-                double nrate = (cnofrate * crate + userrat) / (cnofrate + 1);
-                cnofrate++;
-
-                var person = db.people.Find(iD);
-                person.prate = nrate;
-                person.pnofrate = cnofrate;
-                db.SaveChanges();
-
+                    var person = db.people.Find(iD);
+                    person.prate = nrate;
+                    person.pnofrate = cnofrate;
+                    db.SaveChanges();
+                    Response.Redirect("ONEperson.aspx");
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('must be number between 0 and 10');", true);
+                }
             }
             else
             {

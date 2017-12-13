@@ -31,15 +31,6 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.Label plot;
         
         /// <summary>
-        /// rate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label rate;
-        
-        /// <summary>
         /// urate control.
         /// </summary>
         /// <remarks>
@@ -58,6 +49,15 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.TextBox userrate;
         
         /// <summary>
+        /// CompareValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
+        
+        /// <summary>
         /// moviename control.
         /// </summary>
         /// <remarks>
@@ -65,6 +65,15 @@ namespace WebApplication1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label moviename;
+        
+        /// <summary>
+        /// rate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label rate;
         
         /// <summary>
         /// dir control.

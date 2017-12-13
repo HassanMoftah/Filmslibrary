@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data;
 
+
 namespace WebApplication1
 {
     public partial class ONEmovie : System.Web.UI.Page
@@ -37,8 +38,7 @@ namespace WebApplication1
             moviep bebo = img.Single();
             byte[] imgs = bebo.filmp; 
             string ptr = Convert.ToBase64String(imgs);
-            Image1.ImageUrl = "data:image/png;base64," + ptr;
-
+            Image1.ImageUrl = "data:image;base64," + ptr;
             GridView1.DataSource = db.getactors(z);
             GridView1.DataBind();
 
@@ -65,14 +65,21 @@ namespace WebApplication1
             if(state=="loggedin")
             {
                 double userrat = Convert.ToDouble(userrate.Text.ToString());
-                
-                double nrate = (cnofrate * crate + userrat) / (cnofrate+1);
-                cnofrate++;
+                if (userrat >= 0 && userrat <= 10)
+                {
+                    double nrate = (cnofrate * crate + userrat) / (cnofrate + 1);
+                    cnofrate++;
 
-                var films = db.films.Find(iD);
-                films.rate = nrate;
-                films.Nofrates = cnofrate;
-                db.SaveChanges();
+                    var films = db.films.Find(iD);
+                    films.rate = nrate;
+                    films.Nofrates = cnofrate;
+                    db.SaveChanges();
+                    Response.Redirect("ONEmovie.aspx");
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('must be number between 0 and 10');", true);
+                }
 
             }
             else

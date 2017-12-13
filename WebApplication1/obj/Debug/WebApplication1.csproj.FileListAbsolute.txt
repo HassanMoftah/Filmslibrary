@@ -10,4 +10,3 @@ C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\bin\Microsoft.CodeD
 C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csproj.CoreCompileInputs.cache
 C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
-C:\Users\Moftah\source\repos\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
