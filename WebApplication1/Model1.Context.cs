@@ -15,10 +15,10 @@ namespace WebApplication1
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class MOVIESEntities3 : DbContext
+    public partial class MOVIESEntities5 : DbContext
     {
-        public MOVIESEntities3()
-            : base("name=MOVIESEntities3")
+        public MOVIESEntities5()
+            : base("name=MOVIESEntities5")
         {
         }
     
@@ -28,12 +28,12 @@ namespace WebApplication1
         }
     
         public virtual DbSet<film> films { get; set; }
+        public virtual DbSet<moviep> movieps { get; set; }
         public virtual DbSet<person> people { get; set; }
+        public virtual DbSet<personp> personps { get; set; }
         public virtual DbSet<Relation> Relations { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<user> users { get; set; }
-        public virtual DbSet<moviep> movieps { get; set; }
-        public virtual DbSet<personp> personps { get; set; }
     
         public virtual ObjectResult<string> getactors(Nullable<int> id)
         {

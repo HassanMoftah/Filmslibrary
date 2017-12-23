@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using System.Drawing;
+using System.IO;
 namespace WebApplication1
 {
     public partial class ONEperson : System.Web.UI.Page
     {
 
-        MOVIESEntities3 db = new MOVIESEntities3();
+        MOVIESEntities5 db = new MOVIESEntities5();
         protected void Page_Load(object sender, EventArgs e)
         {
             string ss = (string)Session["person"];
@@ -26,10 +27,18 @@ namespace WebApplication1
 
 
             var img = from k in db.personps where k.personid == hh select k;
-            personp imgs = img.Single();
+            personp imgs = NewMethod(img);
             byte[] bebo = imgs.persp;
             string ptr = Convert.ToBase64String(bebo);
-            Image1.ImageUrl = "data:image;base64," + ptr;
+            ImageMap1.Visible = true;
+            ImageMap1.ImageUrl = "data:image;base64," + ptr;
+            
+           
+        }
+
+        private static personp NewMethod(IQueryable<personp> img)
+        {
+            return img.Single();
         }
 
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -50,7 +59,7 @@ namespace WebApplication1
             int cnofrate = fefo.pnofrate;
 
             string state = (string)Session["status"];
-            if (state == "loggedin")
+            if (state == "loggedin"&&!string.IsNullOrEmpty(userrate.Text.ToString()))
             {
                 
                 double userrat = Convert.ToDouble(userrate.Text.ToString());

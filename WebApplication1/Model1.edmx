@@ -20,13 +20,11 @@
           <Property Name="rate" Type="float" Nullable="false" />
           <Property Name="Nofrates" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'MOVIES.dbo.moviep' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="moviep">
           <Key>
-            <PropertyRef Name="filmp" />
-            <PropertyRef Name="filmid" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="filmp" Type="image" Nullable="false" />
           <Property Name="filmid" Type="int" Nullable="false" />
         </EntityType>
@@ -41,13 +39,11 @@ warning 6002: The table/view 'MOVIES.dbo.moviep' does not have a primary key def
           <Property Name="prate" Type="float" Nullable="false" />
           <Property Name="pnofrate" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="personp">
           <Key>
-            <PropertyRef Name="persp" />
-            <PropertyRef Name="personid" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="persp" Type="image" Nullable="false" />
           <Property Name="personid" Type="int" Nullable="false" />
         </EntityType>
@@ -129,22 +125,12 @@ warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key de
         </Function>
         <EntityContainer Name="MOVIESModelStoreContainer">
           <EntitySet Name="films" EntityType="Self.films" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="moviep" EntityType="Self.moviep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="person" EntityType="Self.person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="personp" EntityType="Self.personp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Relations" EntityType="Self.Relations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="moviep" EntityType="Self.moviep" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [moviep].[filmp] AS [filmp], 
-    [moviep].[filmid] AS [filmid]
-    FROM [dbo].[moviep] AS [moviep]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="personp" EntityType="Self.personp" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [personp].[persp] AS [persp], 
-    [personp].[personid] AS [personid]
-    FROM [dbo].[personp] AS [personp]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_moviep_films" Association="Self.FK_moviep_films">
             <End Role="films" EntitySet="films" />
             <End Role="moviep" EntitySet="moviep" />
@@ -184,6 +170,15 @@ warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key de
           <NavigationProperty Name="movieps" Relationship="Self.FK_moviep_films" FromRole="films" ToRole="moviep" />
           <NavigationProperty Name="Relations" Relationship="Self.FK_Relations_films" FromRole="films" ToRole="Relations" />
         </EntityType>
+        <EntityType Name="moviep">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="filmp" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="filmid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="film" Relationship="Self.FK_moviep_films" FromRole="moviep" ToRole="films" />
+        </EntityType>
         <EntityType Name="person">
           <Key>
             <PropertyRef Name="PID" />
@@ -196,6 +191,15 @@ warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key de
           <Property Name="pnofrate" Type="Int32" Nullable="false" />
           <NavigationProperty Name="personps" Relationship="Self.FK_personp_person" FromRole="person" ToRole="personp" />
           <NavigationProperty Name="Relations" Relationship="Self.FK_Relations_person" FromRole="person" ToRole="Relations" />
+        </EntityType>
+        <EntityType Name="personp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="persp" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="personid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="person" Relationship="Self.FK_personp_person" FromRole="personp" ToRole="person" />
         </EntityType>
         <EntityType Name="Relation">
           <Key>
@@ -223,24 +227,6 @@ warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key de
           </Key>
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="userpassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="moviep">
-          <Key>
-            <PropertyRef Name="filmp" />
-            <PropertyRef Name="filmid" />
-          </Key>
-          <Property Name="filmp" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="filmid" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="film" Relationship="Self.FK_moviep_films" FromRole="moviep" ToRole="films" />
-        </EntityType>
-        <EntityType Name="personp">
-          <Key>
-            <PropertyRef Name="persp" />
-            <PropertyRef Name="personid" />
-          </Key>
-          <Property Name="persp" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="personid" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="person" Relationship="Self.FK_personp_person" FromRole="personp" ToRole="person" />
         </EntityType>
         <Association Name="FK_moviep_films">
           <End Role="films" Type="Self.film" Multiplicity="1" />
@@ -290,14 +276,14 @@ warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MOVIESEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MOVIESEntities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="films" EntityType="Self.film" />
+          <EntitySet Name="movieps" EntityType="Self.moviep" />
           <EntitySet Name="people" EntityType="Self.person" />
+          <EntitySet Name="personps" EntityType="Self.personp" />
           <EntitySet Name="Relations" EntityType="Self.Relation" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="users" EntityType="Self.user" />
-          <EntitySet Name="movieps" EntityType="Self.moviep" />
-          <EntitySet Name="personps" EntityType="Self.personp" />
           <AssociationSet Name="FK_moviep_films" Association="Self.FK_moviep_films">
             <End Role="films" EntitySet="films" />
             <End Role="moviep" EntitySet="movieps" />
@@ -323,7 +309,7 @@ warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key de
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MOVIESModelStoreContainer" CdmEntityContainer="MOVIESEntities3">
+        <EntityContainerMapping StorageEntityContainer="MOVIESModelStoreContainer" CdmEntityContainer="MOVIESEntities5">
           <EntitySetMapping Name="films">
             <EntityTypeMapping TypeName="MOVIESModel.film">
               <MappingFragment StoreEntitySet="films">
@@ -340,6 +326,15 @@ warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="movieps">
+            <EntityTypeMapping TypeName="MOVIESModel.moviep">
+              <MappingFragment StoreEntitySet="moviep">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="filmp" ColumnName="filmp" />
+                <ScalarProperty Name="filmid" ColumnName="filmid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="people">
             <EntityTypeMapping TypeName="MOVIESModel.person">
               <MappingFragment StoreEntitySet="person">
@@ -349,6 +344,15 @@ warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key de
                 <ScalarProperty Name="job" ColumnName="job" />
                 <ScalarProperty Name="prate" ColumnName="prate" />
                 <ScalarProperty Name="pnofrate" ColumnName="pnofrate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personps">
+            <EntityTypeMapping TypeName="MOVIESModel.personp">
+              <MappingFragment StoreEntitySet="personp">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="persp" ColumnName="persp" />
+                <ScalarProperty Name="personid" ColumnName="personid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -377,22 +381,6 @@ warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key de
               <MappingFragment StoreEntitySet="users">
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="userpassword" ColumnName="userpassword" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="movieps">
-            <EntityTypeMapping TypeName="MOVIESModel.moviep">
-              <MappingFragment StoreEntitySet="moviep">
-                <ScalarProperty Name="filmp" ColumnName="filmp" />
-                <ScalarProperty Name="filmid" ColumnName="filmid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="personps">
-            <EntityTypeMapping TypeName="MOVIESModel.personp">
-              <MappingFragment StoreEntitySet="personp">
-                <ScalarProperty Name="persp" ColumnName="persp" />
-                <ScalarProperty Name="personid" ColumnName="personid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

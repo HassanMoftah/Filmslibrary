@@ -14,6 +14,7 @@ namespace WebApplication1
     
     public partial class personp
     {
+        public int id { get; set; }
         public byte[] persp { get; set; }
         public int personid { get; set; }
     

@@ -9,7 +9,7 @@ namespace WebApplication1
 {
     public partial class submit : System.Web.UI.Page
     {
-        MOVIESEntities3 db = new MOVIESEntities3();
+        MOVIESEntities5 db = new MOVIESEntities5();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -25,10 +25,7 @@ namespace WebApplication1
                 us.userpassword = pass.Text.ToString();
                 db.users.Add(us);
                 db.SaveChanges();
-                
-
-
-                    Response.Redirect("HomePage.aspx");
+                Response.Redirect("HomePage.aspx");
                 
 
             }
@@ -45,6 +42,7 @@ namespace WebApplication1
                 else
                 {
                     Session["status"] = "loggedin";
+                    Session["username"] = us.username.ToString();
                     Response.Redirect("HomePage.aspx");
 
                 }

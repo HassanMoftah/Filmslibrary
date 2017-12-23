@@ -17,6 +17,15 @@
     <NavigationProperty Name="movieps" Relationship="Self.FK_moviep_films" FromRole="films" ToRole="moviep" />
     <NavigationProperty Name="Relations" Relationship="Self.FK_Relations_films" FromRole="films" ToRole="Relations" />
   </EntityType>
+  <EntityType Name="moviep">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="filmp" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="filmid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="film" Relationship="Self.FK_moviep_films" FromRole="moviep" ToRole="films" />
+  </EntityType>
   <EntityType Name="person">
     <Key>
       <PropertyRef Name="PID" />
@@ -29,6 +38,15 @@
     <Property Name="pnofrate" Type="Int32" Nullable="false" />
     <NavigationProperty Name="personps" Relationship="Self.FK_personp_person" FromRole="person" ToRole="personp" />
     <NavigationProperty Name="Relations" Relationship="Self.FK_Relations_person" FromRole="person" ToRole="Relations" />
+  </EntityType>
+  <EntityType Name="personp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="persp" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="personid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="person" Relationship="Self.FK_personp_person" FromRole="personp" ToRole="person" />
   </EntityType>
   <EntityType Name="Relation">
     <Key>
@@ -56,24 +74,6 @@
     </Key>
     <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="userpassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-  </EntityType>
-  <EntityType Name="moviep">
-    <Key>
-      <PropertyRef Name="filmp" />
-      <PropertyRef Name="filmid" />
-    </Key>
-    <Property Name="filmp" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-    <Property Name="filmid" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="film" Relationship="Self.FK_moviep_films" FromRole="moviep" ToRole="films" />
-  </EntityType>
-  <EntityType Name="personp">
-    <Key>
-      <PropertyRef Name="persp" />
-      <PropertyRef Name="personid" />
-    </Key>
-    <Property Name="persp" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-    <Property Name="personid" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="person" Relationship="Self.FK_personp_person" FromRole="personp" ToRole="person" />
   </EntityType>
   <Association Name="FK_moviep_films">
     <End Role="films" Type="Self.film" Multiplicity="1" />
@@ -123,14 +123,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="MOVIESEntities3" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="MOVIESEntities4" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="films" EntityType="Self.film" />
+    <EntitySet Name="movieps" EntityType="Self.moviep" />
     <EntitySet Name="people" EntityType="Self.person" />
+    <EntitySet Name="personps" EntityType="Self.personp" />
     <EntitySet Name="Relations" EntityType="Self.Relation" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="users" EntityType="Self.user" />
-    <EntitySet Name="movieps" EntityType="Self.moviep" />
-    <EntitySet Name="personps" EntityType="Self.personp" />
     <AssociationSet Name="FK_moviep_films" Association="Self.FK_moviep_films">
       <End Role="films" EntitySet="films" />
       <End Role="moviep" EntitySet="movieps" />
@@ -147,8 +147,5 @@
       <End Role="person" EntitySet="people" />
       <End Role="Relations" EntitySet="Relations" />
     </AssociationSet>
-    <FunctionImport Name="getactors" ReturnType="Collection(String)">
-      <Parameter Name="id" Mode="In" Type="Int32" />
-    </FunctionImport>
   </EntityContainer>
 </Schema>

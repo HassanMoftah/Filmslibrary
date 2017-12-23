@@ -38,15 +38,20 @@
                
 
             </div>
-            <div style="float:right; background-color:black;" >
+            <div class="words" style="float:right; background-color:black;" >
                     <asp:Button ID="SIGNUP" runat="server" Text="Sign Up" OnClick="SIGNUP_Click" />
                     <asp:Button ID="login" runat="server" Text="Log in" OnClick="login_Click" />
+                <asp:Label ID="name" runat="server"></asp:Label>
                 <asp:Button ID="logout" runat="server" Text="Log out" OnClick="logout_Click" />
                         </div>
         
         </nav>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
+                
+                   
+                
 
                 
                    

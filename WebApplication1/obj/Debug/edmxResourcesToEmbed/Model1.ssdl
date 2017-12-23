@@ -15,13 +15,11 @@
     <Property Name="rate" Type="float" Nullable="false" />
     <Property Name="Nofrates" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'MOVIES.dbo.moviep' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="moviep">
     <Key>
-      <PropertyRef Name="filmp" />
-      <PropertyRef Name="filmid" />
+      <PropertyRef Name="id" />
     </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="filmp" Type="image" Nullable="false" />
     <Property Name="filmid" Type="int" Nullable="false" />
   </EntityType>
@@ -36,15 +34,21 @@ warning 6002: The table/view 'MOVIES.dbo.moviep' does not have a primary key def
     <Property Name="prate" Type="float" Nullable="false" />
     <Property Name="pnofrate" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="personp">
     <Key>
-      <PropertyRef Name="persp" />
-      <PropertyRef Name="personid" />
+      <PropertyRef Name="id" />
     </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="persp" Type="image" Nullable="false" />
     <Property Name="personid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Relations">
+    <Key>
+      <PropertyRef Name="mm" />
+    </Key>
+    <Property Name="mm" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="movieid" Type="int" Nullable="false" />
+    <Property Name="perid" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -87,23 +91,41 @@ warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key de
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Relations_films">
+    <End Role="films" Type="Self.films" Multiplicity="1" />
+    <End Role="Relations" Type="Self.Relations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="films">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Relations">
+        <PropertyRef Name="movieid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Relations_person">
+    <End Role="person" Type="Self.person" Multiplicity="1" />
+    <End Role="Relations" Type="Self.Relations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="person">
+        <PropertyRef Name="PID" />
+      </Principal>
+      <Dependent Role="Relations">
+        <PropertyRef Name="perid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="getactors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="MOVIESModelStoreContainer">
     <EntitySet Name="films" EntityType="Self.films" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="moviep" EntityType="Self.moviep" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="person" EntityType="Self.person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="personp" EntityType="Self.personp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Relations" EntityType="Self.Relations" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="moviep" EntityType="Self.moviep" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [moviep].[filmp] AS [filmp], 
-    [moviep].[filmid] AS [filmid]
-    FROM [dbo].[moviep] AS [moviep]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="personp" EntityType="Self.personp" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [personp].[persp] AS [persp], 
-    [personp].[personid] AS [personid]
-    FROM [dbo].[personp] AS [personp]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_moviep_films" Association="Self.FK_moviep_films">
       <End Role="films" EntitySet="films" />
       <End Role="moviep" EntitySet="moviep" />
@@ -111,6 +133,14 @@ warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key de
     <AssociationSet Name="FK_personp_person" Association="Self.FK_personp_person">
       <End Role="person" EntitySet="person" />
       <End Role="personp" EntitySet="personp" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Relations_films" Association="Self.FK_Relations_films">
+      <End Role="films" EntitySet="films" />
+      <End Role="Relations" EntitySet="Relations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Relations_person" Association="Self.FK_Relations_person">
+      <End Role="person" EntitySet="person" />
+      <End Role="Relations" EntitySet="Relations" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

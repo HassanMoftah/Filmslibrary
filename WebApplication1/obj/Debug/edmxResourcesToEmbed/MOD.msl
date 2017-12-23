@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="MOVIESModelStoreContainer" CdmEntityContainer="MOVIESEntities3">
+  <EntityContainerMapping StorageEntityContainer="MOVIESModelStoreContainer" CdmEntityContainer="MOVIESEntities4">
     <EntitySetMapping Name="films">
       <EntityTypeMapping TypeName="MOVIESModel.film">
         <MappingFragment StoreEntitySet="films">
@@ -17,6 +17,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="movieps">
+      <EntityTypeMapping TypeName="MOVIESModel.moviep">
+        <MappingFragment StoreEntitySet="moviep">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="filmp" ColumnName="filmp" />
+          <ScalarProperty Name="filmid" ColumnName="filmid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="people">
       <EntityTypeMapping TypeName="MOVIESModel.person">
         <MappingFragment StoreEntitySet="person">
@@ -26,6 +35,15 @@
           <ScalarProperty Name="job" ColumnName="job" />
           <ScalarProperty Name="prate" ColumnName="prate" />
           <ScalarProperty Name="pnofrate" ColumnName="pnofrate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="personps">
+      <EntityTypeMapping TypeName="MOVIESModel.personp">
+        <MappingFragment StoreEntitySet="personp">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="persp" ColumnName="persp" />
+          <ScalarProperty Name="personid" ColumnName="personid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -57,22 +75,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="movieps">
-      <EntityTypeMapping TypeName="MOVIESModel.moviep">
-        <MappingFragment StoreEntitySet="moviep">
-          <ScalarProperty Name="filmp" ColumnName="filmp" />
-          <ScalarProperty Name="filmid" ColumnName="filmid" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="personps">
-      <EntityTypeMapping TypeName="MOVIESModel.personp">
-        <MappingFragment StoreEntitySet="personp">
-          <ScalarProperty Name="persp" ColumnName="persp" />
-          <ScalarProperty Name="personid" ColumnName="personid" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="getactors" FunctionName="MOVIESModel.Store.getactors" />
   </EntityContainerMapping>
 </Mapping>

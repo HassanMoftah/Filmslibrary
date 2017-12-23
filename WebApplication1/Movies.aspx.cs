@@ -11,7 +11,7 @@ namespace WebApplication1
     public partial class Movies : System.Web.UI.Page
     {
 
-        MOVIESEntities3 DB = new MOVIESEntities3();
+        MOVIESEntities5 DB = new MOVIESEntities5();
 
         protected void Page_Load(object sender, EventArgs e)
         {

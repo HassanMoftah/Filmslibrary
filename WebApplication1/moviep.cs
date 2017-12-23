@@ -14,6 +14,7 @@ namespace WebApplication1
     
     public partial class moviep
     {
+        public int id { get; set; }
         public byte[] filmp { get; set; }
         public int filmid { get; set; }
     

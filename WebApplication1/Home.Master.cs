@@ -9,13 +9,23 @@ namespace WebApplication1
 {
     public partial class Site1 : System.Web.UI.MasterPage
     {
+
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             string ses = (string)Session["status"];
-            if (ses == "loggenin")
+            if (ses == "loggedin")
             {
-                SIGNUP.Text = "signed";
-                login.Text = "loggedin";
+                SIGNUP.Visible = false;
+                login.Visible = false;
+                name.Text = "Welcome " + Session["username"].ToString(); 
+            }
+            else
+            {
+                name.Visible = false;
+                SIGNUP.Visible = true;
+                login.Visible = true;
+                name.Text = "";
             }
         }
 
@@ -34,6 +44,7 @@ namespace WebApplication1
         protected void logout_Click(object sender, EventArgs e)
         {
             Session["status"] = "";
+            Page_Load(sender, e);
         }
     }
 }

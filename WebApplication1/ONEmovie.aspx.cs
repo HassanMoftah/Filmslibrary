@@ -6,14 +6,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data;
-
-
+using System.Drawing;
+using System.IO;
 namespace WebApplication1
 {
     public partial class ONEmovie : System.Web.UI.Page
     {
 
-        MOVIESEntities3 db = new MOVIESEntities3();
+        MOVIESEntities5 db = new MOVIESEntities5();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -38,7 +38,12 @@ namespace WebApplication1
             moviep bebo = img.Single();
             byte[] imgs = bebo.filmp; 
             string ptr = Convert.ToBase64String(imgs);
+           
+
             Image1.ImageUrl = "data:image;base64," + ptr;
+            
+           
+
             GridView1.DataSource = db.getactors(z);
             GridView1.DataBind();
 
@@ -62,7 +67,7 @@ namespace WebApplication1
             int cnofrate = fefo.Nofrates;
             
             string state = (string)Session["status"];
-            if(state=="loggedin")
+            if(state=="loggedin"&& !string.IsNullOrEmpty(userrate.Text.ToString()))
             {
                 double userrat = Convert.ToDouble(userrate.Text.ToString());
                 if (userrat >= 0 && userrat <= 10)

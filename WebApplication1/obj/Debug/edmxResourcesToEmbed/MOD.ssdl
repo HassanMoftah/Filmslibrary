@@ -15,13 +15,11 @@
     <Property Name="rate" Type="float" Nullable="false" />
     <Property Name="Nofrates" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'MOVIES.dbo.moviep' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="moviep">
     <Key>
-      <PropertyRef Name="filmp" />
-      <PropertyRef Name="filmid" />
+      <PropertyRef Name="id" />
     </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="filmp" Type="image" Nullable="false" />
     <Property Name="filmid" Type="int" Nullable="false" />
   </EntityType>
@@ -36,13 +34,11 @@ warning 6002: The table/view 'MOVIES.dbo.moviep' does not have a primary key def
     <Property Name="prate" Type="float" Nullable="false" />
     <Property Name="pnofrate" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="personp">
     <Key>
-      <PropertyRef Name="persp" />
-      <PropertyRef Name="personid" />
+      <PropertyRef Name="id" />
     </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="persp" Type="image" Nullable="false" />
     <Property Name="personid" Type="int" Nullable="false" />
   </EntityType>
@@ -119,27 +115,14 @@ warning 6002: The table/view 'MOVIES.dbo.personp' does not have a primary key de
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="getactors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="id" Type="int" Mode="In" />
-  </Function>
   <EntityContainer Name="MOVIESModelStoreContainer">
     <EntitySet Name="films" EntityType="Self.films" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="moviep" EntityType="Self.moviep" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="person" EntityType="Self.person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="personp" EntityType="Self.personp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Relations" EntityType="Self.Relations" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="moviep" EntityType="Self.moviep" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [moviep].[filmp] AS [filmp], 
-    [moviep].[filmid] AS [filmid]
-    FROM [dbo].[moviep] AS [moviep]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="personp" EntityType="Self.personp" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [personp].[persp] AS [persp], 
-    [personp].[personid] AS [personid]
-    FROM [dbo].[personp] AS [personp]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_moviep_films" Association="Self.FK_moviep_films">
       <End Role="films" EntitySet="films" />
       <End Role="moviep" EntitySet="moviep" />

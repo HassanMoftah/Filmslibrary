@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="396f0ee669ce41e08e2bec5290580241" Name="Diagram1">
-        <EntityTypeShape EntityType="MOVIESModel.film" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MOVIESModel.person" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MOVIESModel.Relation" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MOVIESModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MOVIESModel.user" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MOVIESModel.moviep" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+      <Diagram DiagramId="087174e7ab7f413ebabf80635f8fdfdc" Name="Diagram1">
+        <EntityTypeShape EntityType="MOVIESModel.film" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MOVIESModel.moviep" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MOVIESModel.person" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="MOVIESModel.personp" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MOVIESModel.Relation" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MOVIESModel.sysdiagram" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MOVIESModel.user" Width="1.5" PointX="5.75" PointY="5.125" IsExpanded="true" />
         <AssociationConnector Association="MOVIESModel.FK_moviep_films" ManuallyRouted="false" />
         <AssociationConnector Association="MOVIESModel.FK_Relations_films" ManuallyRouted="false" />
         <AssociationConnector Association="MOVIESModel.FK_personp_person" ManuallyRouted="false" />

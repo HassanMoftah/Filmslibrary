@@ -10,7 +10,7 @@ namespace WebApplication1
     public partial class Authors : System.Web.UI.Page
         
     {
-        MOVIESEntities3 db = new MOVIESEntities3();
+        MOVIESEntities5 db = new MOVIESEntities5();
         protected void Page_Load(object sender, EventArgs e)
         {
             var query = from p in db.people where p.job == "author" select new {p.PID,p.Name, p.birth };

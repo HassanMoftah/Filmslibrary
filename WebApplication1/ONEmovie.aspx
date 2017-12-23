@@ -14,8 +14,8 @@
             <div class ="row">
 
           
-           <asp:Button ID="urate" runat="server" Text="submit your rate" BackColor="#333333" ForeColor="#FFFFCC" OnClick="urate_Click" /> 
-           <h3>Rate</h3> <asp:TextBox ID="userrate" runat="server" BackColor="#333333" ForeColor="#FFFFCC"></asp:TextBox> 
+           <asp:Button ID="urate" runat="server" Text="submit your rate" BackColor="#333333" ForeColor="#FFFFCC" OnClick="urate_Click" Height="39px" Width="209px" /> 
+           <h3>Rate</h3> <asp:TextBox ID="userrate" runat="server" BackColor="#333333" ForeColor="#FFFFCC" Height="45px" Width="160px"></asp:TextBox> 
                 <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="userrate" ErrorMessage="must be number" Type="Double"></asp:CompareValidator>
             </div>
         </div>
